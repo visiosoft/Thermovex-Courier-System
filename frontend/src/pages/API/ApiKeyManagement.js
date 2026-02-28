@@ -47,7 +47,6 @@ import { toast } from 'react-toastify';
 const ApiKeyManagement = () => {
     const [apiKeys, setApiKeys] = useState([]);
     const [shippers, setShippers] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [createDialogOpen, setCreateDialogOpen] = useState(false);
     const [viewDialogOpen, setViewDialogOpen] = useState(false);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -74,14 +73,11 @@ const ApiKeyManagement = () => {
 
     const fetchApiKeys = async () => {
         try {
-            setLoading(true);
             const response = await api.get('/api-keys');
             setApiKeys(response.data.apiKeys || []);
         } catch (error) {
             console.error('Error fetching API keys:', error);
             toast.error('Failed to fetch API keys');
-        } finally {
-            setLoading(false);
         }
     };
 

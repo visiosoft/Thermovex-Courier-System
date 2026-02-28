@@ -22,11 +22,7 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
-    TextField,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem
+    TextField
 } from '@mui/material';
 import {
     ArrowBack,
@@ -96,6 +92,7 @@ const ShipperDetails = () => {
         fetchConsignees();
         fetchCheques();
         fetchTickets();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const fetchShipperDetails = async () => {

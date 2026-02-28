@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
     Box,
     Button,
-    Paper,
     Typography,
     Grid,
     Chip,
@@ -12,7 +11,6 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableHead,
     TableRow,
     IconButton,
     Dialog,
@@ -20,16 +18,11 @@ import {
     DialogContent,
     DialogActions,
     TextField,
-    MenuItem,
-    Stepper,
-    Step,
-    StepLabel,
-    StepContent
+    MenuItem
 } from '@mui/material';
 import {
     ArrowBack as BackIcon,
     Print as PrintIcon,
-    Edit as EditIcon,
     LocalShipping as ShippingIcon,
     Cancel as CancelIcon,
     CheckCircle as CheckIcon
@@ -67,6 +60,7 @@ const BookingDetails = () => {
 
     useEffect(() => {
         fetchBookingDetails();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const fetchBookingDetails = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Button,
@@ -24,8 +24,7 @@ import {
     Edit as EditIcon,
     Delete as DeleteIcon,
     Visibility as ViewIcon,
-    FileUpload as UploadIcon,
-    GetApp as DownloadIcon
+    FileUpload as UploadIcon
 } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +33,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const BookingManagement = () => {
     const navigate = useNavigate();
-    const { user, hasPermission } = useAuth();
+    const { hasPermission } = useAuth();
 
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -61,6 +60,7 @@ const BookingManagement = () => {
 
     useEffect(() => {
         fetchBookings();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm, statusFilter, serviceTypeFilter, pagination.page]);
 
     const fetchBookings = async () => {

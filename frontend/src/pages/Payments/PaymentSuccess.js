@@ -13,8 +13,7 @@ import {
 } from '@mui/material';
 import {
     CheckCircle as CheckCircleIcon,
-    Error as ErrorIcon,
-    ArrowBack as BackIcon
+    Error as ErrorIcon
 } from '@mui/icons-material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../../services/api';
@@ -41,6 +40,7 @@ const PaymentSuccess = () => {
             setError('Invalid payment parameters');
             setLoading(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gateway, orderId, payerId]);
 
     const capturePayPalPayment = async () => {

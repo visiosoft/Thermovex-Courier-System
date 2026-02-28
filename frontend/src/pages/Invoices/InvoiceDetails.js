@@ -14,7 +14,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper,
     IconButton,
     Dialog,
     DialogTitle,
@@ -27,8 +26,7 @@ import {
 import {
     ArrowBack as BackIcon,
     GetApp as DownloadIcon,
-    Payment as PaymentIcon,
-    Print as PrintIcon
+    Payment as PaymentIcon
 } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
@@ -52,6 +50,7 @@ const InvoiceDetails = () => {
 
     useEffect(() => {
         fetchInvoice();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const fetchInvoice = async () => {

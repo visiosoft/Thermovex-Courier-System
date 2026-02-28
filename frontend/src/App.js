@@ -13,7 +13,6 @@ import { SettingsProvider } from './context/SettingsContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import Login from './pages/Auth/Login';
-import Dashboard from './pages/Dashboard/Dashboard';
 import EnhancedDashboard from './pages/Dashboard/EnhancedDashboard';
 import UserManagement from './pages/Users/UserManagement';
 import ReportsHub from './pages/Reports/ReportsHub';

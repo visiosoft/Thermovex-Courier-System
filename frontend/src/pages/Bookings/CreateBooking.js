@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Button,
     TextField,
-    Paper,
     Typography,
     Grid,
     MenuItem,
@@ -17,15 +16,13 @@ import {
 } from '@mui/material';
 import { ArrowBack as BackIcon, Save as SaveIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { bookingAPI, shipperAPI, consigneeAPI } from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
 
 const CreateBooking = () => {
     const navigate = useNavigate();
-    const { user } = useAuth();
 
     const [shippers, setShippers] = useState([]);
     const [consignees, setConsignees] = useState([]);
@@ -71,6 +68,7 @@ const CreateBooking = () => {
         }
     };
 
+    // eslint-disable-next-line no-unused-vars
     const calculateCharges = (values) => {
         const weight = parseFloat(values.weight) || 0;
         const volumetricWeight = values.dimensions.length && values.dimensions.width && values.dimensions.height
@@ -110,7 +108,7 @@ const CreateBooking = () => {
         // Total
         const totalAmount = subtotal + gstAmount;
 
-        return {
+        const charges = {
             shippingCharges: parseFloat(shippingCharges.toFixed(2)),
             insuranceCharges: parseFloat(insuranceCharges.toFixed(2)),
             codCharges: parseFloat(codCharges.toFixed(2)),
@@ -118,6 +116,9 @@ const CreateBooking = () => {
             gstAmount: parseFloat(gstAmount.toFixed(2)),
             totalAmount: parseFloat(totalAmount.toFixed(2))
         };
+
+        setCalculatedCharges(charges);
+        return charges;
     };
 
     const validationSchema = Yup.object({

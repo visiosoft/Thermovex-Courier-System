@@ -31,8 +31,7 @@ import {
     Delete,
     Search,
     Visibility,
-    CheckCircle,
-    Block
+    CheckCircle
 } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { shipperAPI } from '../../services/api';
@@ -77,7 +76,7 @@ const ShipperManagement = () => {
 
     useEffect(() => {
         fetchShippers();
-    }, [statusFilter]);
+    }, [statusFilter]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchShippers = async () => {
         try {

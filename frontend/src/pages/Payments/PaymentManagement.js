@@ -56,6 +56,7 @@ const PaymentManagement = () => {
     useEffect(() => {
         fetchPayments();
         fetchStats();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [statusFilter, gatewayFilter]);
 
     const fetchPayments = async () => {

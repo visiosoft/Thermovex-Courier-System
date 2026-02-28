@@ -68,6 +68,7 @@ const EnhancedDashboard = () => {
 
     useEffect(() => {
         fetchDashboardData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [period]);
 
     const fetchDashboardData = async () => {

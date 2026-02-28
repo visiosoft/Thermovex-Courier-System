@@ -23,15 +23,11 @@ import {
     Grid,
     Card,
     CardContent,
-    Divider,
-    List,
-    ListItem,
-    ListItemText
+    Divider
 } from '@mui/material';
 import {
     Search as SearchIcon,
     Visibility as ViewIcon,
-    Assignment as AssignIcon,
     CheckCircle as ResolveIcon,
     Close as CloseIcon,
     Refresh as RefreshIcon
@@ -55,7 +51,6 @@ const ExceptionManagement = () => {
     });
     const [viewDialog, setViewDialog] = useState(false);
     const [selectedException, setSelectedException] = useState(null);
-    const [assignDialog, setAssignDialog] = useState(false);
     const [resolveDialog, setResolveDialog] = useState(false);
     const [createDialog, setCreateDialog] = useState(false);
     const [resolutionData, setResolutionData] = useState({
@@ -100,6 +95,7 @@ const ExceptionManagement = () => {
 
     useEffect(() => {
         fetchExceptions();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, rowsPerPage, filters]);
 
     const fetchExceptions = async () => {

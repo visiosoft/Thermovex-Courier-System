@@ -58,6 +58,7 @@ const InvoiceManagement = () => {
     useEffect(() => {
         fetchInvoices();
         fetchStats();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [statusFilter, paymentStatusFilter]);
 
     const fetchInvoices = async () => {

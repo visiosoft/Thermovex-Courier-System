@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Button,
@@ -27,12 +27,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as XLSX from 'xlsx';
 import { bookingAPI } from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
 
 const BulkUpload = () => {
     const navigate = useNavigate();
-    const { user } = useAuth();
-
     const [file, setFile] = useState(null);
     const [parsedData, setParsedData] = useState([]);
     const [uploading, setUploading] = useState(false);

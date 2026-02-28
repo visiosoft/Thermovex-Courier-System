@@ -30,8 +30,7 @@ import {
     Delete,
     Block,
     Search,
-    LockReset,
-    History
+    LockReset
 } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { userAPI, roleAPI } from '../../services/api';

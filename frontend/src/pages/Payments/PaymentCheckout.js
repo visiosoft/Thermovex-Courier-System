@@ -36,6 +36,7 @@ const PaymentCheckout = () => {
 
     useEffect(() => {
         fetchInvoice();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invoiceId]);
 
     const fetchInvoice = async () => {

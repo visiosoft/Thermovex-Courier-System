@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     Box,
     Card,
@@ -28,7 +28,6 @@ const CreateInvoice = () => {
     const navigate = useNavigate();
     const { formatCurrency, currencySymbol } = useSettings();
     const [shippers, setShippers] = useState([]);
-    const [bookings, setBookings] = useState([]);
     const [selectedShipper, setSelectedShipper] = useState(null);
     const [selectedBookings, setSelectedBookings] = useState([]);
     const [availableBookings, setAvailableBookings] = useState([]);
@@ -50,17 +49,36 @@ const CreateInvoice = () => {
 
     useEffect(() => {
         fetchShippers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         if (selectedShipper && form.periodFrom && form.periodTo) {
             fetchBookings();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedShipper, form.periodFrom, form.periodTo]);
+
+    const calculateTotals = useCallback(() => {
+        const subtotal = selectedBookings.reduce((sum, b) => sum + b.totalAmount, 0);
+        const discountAmount = form.discountPercentage
+            ? (subtotal * form.discountPercentage) / 100
+            : form.discount;
+        const afterDiscount = subtotal - discountAmount;
+        const taxAmount = (afterDiscount * 18) / 100; // 18% GST
+        const total = afterDiscount + taxAmount;
+
+        setTotals({
+            subtotal,
+            discount: discountAmount,
+            taxAmount,
+            total
+        });
+    }, [selectedBookings, form.discount, form.discountPercentage]);
 
     useEffect(() => {
         calculateTotals();
-    }, [selectedBookings, form.discount, form.discountPercentage]);
+    }, [calculateTotals]);
 
     const fetchShippers = async () => {
         try {
@@ -116,23 +134,6 @@ const CreateInvoice = () => {
 
     const handleRemoveBooking = (bookingId) => {
         setSelectedBookings(selectedBookings.filter(b => b._id !== bookingId));
-    };
-
-    const calculateTotals = () => {
-        const subtotal = selectedBookings.reduce((sum, b) => sum + b.totalAmount, 0);
-        const discountAmount = form.discountPercentage
-            ? (subtotal * form.discountPercentage) / 100
-            : form.discount;
-        const afterDiscount = subtotal - discountAmount;
-        const taxAmount = (afterDiscount * 18) / 100; // 18% GST
-        const total = afterDiscount + taxAmount;
-
-        setTotals({
-            subtotal,
-            discount: discountAmount,
-            taxAmount,
-            total
-        });
     };
 
     const handleSubmit = async () => {
